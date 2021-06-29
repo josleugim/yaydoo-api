@@ -13,13 +13,15 @@ schema {
 
 const productTypeDefs = require('../graphql/product/typeDefs');
 const productResolvers = require('../graphql/product/resolvers');
+const userTypeDefs = require('../graphql/user/typeDefs');
+const userResolvers = require('../graphql/user/resolvers');
 
 const schema = makeExecutableSchema(
     {
         typeDefs: [
-            rootTypeDefs, productTypeDefs
+            rootTypeDefs, productTypeDefs, userTypeDefs
         ],
-        resolvers: merge(productResolvers)
+        resolvers: merge(productResolvers, userResolvers)
     }
 );
 
