@@ -13,6 +13,13 @@ const create = async (userInput) => {
     return await User.create({ ...user, ...userInput })
 };
 
+const findOne = async query => {
+    return User
+        .findOne(query)
+        .catch(err => console.log(err))
+};
+
 module.exports = {
-    create
+    create,
+    findOne
 }
