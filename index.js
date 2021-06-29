@@ -9,7 +9,11 @@ require('./src/config/express')(app);
 const { schema } = require('./src/config/graphQL');
 
 const server = new ApolloServer({
-    schema
+    schema,
+    formatError: (err) => {
+        console.error(err)
+        return err;
+    }
 });
 
 server.applyMiddleware({ app, path: '/graphql' });

@@ -5,6 +5,20 @@ const { gql } = require('apollo-server');
 const typeDefs = gql`
     type Product {
         _id: ID!
+        name: String!
+        sku: String!
+        quantity: Int!
+        price: Int!
+        createdAt: String
+        updatedAt: String
+        isActive: Boolean
+    }
+    
+    input ProductInput {
+        name: String
+        sku: String
+        quantity: Int
+        price: Int
     }
     
     extend type Query {
@@ -12,7 +26,7 @@ const typeDefs = gql`
     }
     
     extend type Mutation {
-        addProduct: Product
+        addProduct(input: ProductInput!): Product
     }
 `;
 
