@@ -4,7 +4,8 @@ const { create } = require('../../repositories/UserRepository');
 
 const userResolver = {
     Mutation: {
-        addUser: (async (root, { input }, context) => {
+        addVendor: (async (root, { input }, context) => {
+            input.role = 'vendor';
             const user = await create(input);
             return user.toObject();
         })

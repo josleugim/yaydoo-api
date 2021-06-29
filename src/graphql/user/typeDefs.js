@@ -17,15 +17,14 @@ const typeDefs = gql`
         customer
     }
     
-    input UserInput {
+    input VendorInput {
         name: String
-        role: Roles
         email: String
         password: String
     }
     
     extend type Mutation {
-        addUser(input: UserInput!): User
+        addVendor(input: VendorInput!): User
     }
 `;
 
