@@ -5,6 +5,7 @@ const Product = require('../models/Product');
 const findAll = async (query) => {
     return await Product
         .find(query)
+        .populate('vendor')
         .catch(err => console.log(err))
 };
 

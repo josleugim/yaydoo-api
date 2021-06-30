@@ -5,6 +5,11 @@ const moment = require('moment-timezone');
 const { formatDate } = require('../helpers/common');
 
 const ProductSchema = new mongoose.Schema({
+    vendorId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
     name: {
         type: String,
         required: true
@@ -34,5 +39,12 @@ const ProductSchema = new mongoose.Schema({
 });
 
 ProductSchema.set('toObject', { getters: true, virtuals: true });
+
+ProductSchema.virtual('vendor', {
+    ref: 'User',
+    localField: 'vendorId',
+    foreignField: '_id',
+    justOne: true
+});
 
 module.exports = mongoose.model('Product', ProductSchema);

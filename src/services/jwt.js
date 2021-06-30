@@ -18,6 +18,13 @@ const verify = token => {
     }
 };
 
+const validate = (token) => {
+    jwt.verify(token, process.env.TOKEN_SECRET, function (err, decoded) {
+        return !err;
+    })
+}
+
 module.exports = {
-    verify
+    verify,
+    validate
 }

@@ -5,10 +5,11 @@ const { gql } = require('apollo-server');
 const typeDefs = gql`
     type Product {
         _id: ID!
+        vendor: User
         name: String!
         sku: String!
         quantity: Int!
-        price: Int!
+        price: Float!
         createdAt: String
         updatedAt: String
         isActive: Boolean
@@ -18,7 +19,7 @@ const typeDefs = gql`
         name: String
         sku: String
         quantity: Int
-        price: Int
+        price: Float
     }
     
     extend type Query {

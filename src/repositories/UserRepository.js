@@ -19,7 +19,14 @@ const findOne = async query => {
         .catch(err => console.log(err))
 };
 
+const findById = async (id) => {
+    return User
+        .findById(id)
+        .catch(err => console.log(err))
+}
+
 module.exports = {
     create,
-    findOne
+    findOne,
+    findById
 }
