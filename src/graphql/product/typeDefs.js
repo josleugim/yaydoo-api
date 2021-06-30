@@ -22,8 +22,16 @@ const typeDefs = gql`
         price: Float
     }
     
+    input InputFilters {
+        name: String
+        sku: String
+        minPrice: Int
+        maxPrice: Int
+        vendorId: ID
+    }
+    
     extend type Query {
-        products: [Product]
+        products(filters: InputFilters): [Product]
     }
     
     extend type Mutation {

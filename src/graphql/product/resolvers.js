@@ -6,10 +6,26 @@ const { authenticated, validateRole } = require('../../services/auth');
 
 const ProductResolver = {
     Query: {
-        products: authenticated(validateRole(['customer', 'vendor'])(async (root, {type, status}, context) => {
+        products: authenticated(validateRole(['customer', 'vendor', 'admin'])(async (root, {filters = {}}, context) => {
             const query = {};
             if (context.currentUser.role === 'vendor') {
                 query.vendorId = context.currentUser._id;
+            }
+
+            if (filters.name) {
+                query.name = filters.name
+            }
+
+            if (filters.sku) {
+                query.sku = filters.sku;
+            }
+
+            if (filters.minPrice >= 0 && filters.maxPrice >= 0) {
+                query.price = { $gte: Number(filters.minPrice), $lte: Number(filters.maxPrice) }
+            }
+
+            if (filters.vendorId && context.currentUser.role === 'admin') {
+                query.vendorId = filters.vendorId;
             }
 
             return await findAll(query);
