@@ -25,8 +25,8 @@ const typeDefs = gql`
     input InputFilters {
         name: String
         sku: String
-        minPrice: Int
-        maxPrice: Int
+        minPrice: String
+        maxPrice: String
         vendorId: ID
     }
     

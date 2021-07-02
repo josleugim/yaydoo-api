@@ -21,7 +21,7 @@ const ProductResolver = {
                 query.sku = { $regex: filters.sku };
             }
 
-            if (filters.minPrice > 0 && filters.maxPrice > 0) {
+            if (Number(filters.minPrice) > 0 && Number(filters.maxPrice) > 0) {
                 query.price = { $gte: Number(filters.minPrice), $lte: Number(filters.maxPrice) }
             }
 
