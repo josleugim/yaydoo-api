@@ -1,4 +1,5 @@
 'use strict';
+
 const { findAll, create } = require('../../repositories/ProductRepository');
 const { formatDate } = require('../../helpers/common');
 const moment = require('moment-timezone');
@@ -13,14 +14,14 @@ const ProductResolver = {
             }
 
             if (filters.name) {
-                query.name = filters.name
+                query.name = { $regex: `${filters.name}` }
             }
 
             if (filters.sku) {
-                query.sku = filters.sku;
+                query.sku = { $regex: filters.sku };
             }
 
-            if (filters.minPrice >= 0 && filters.maxPrice >= 0) {
+            if (filters.minPrice > 0 && filters.maxPrice > 0) {
                 query.price = { $gte: Number(filters.minPrice), $lte: Number(filters.maxPrice) }
             }
 

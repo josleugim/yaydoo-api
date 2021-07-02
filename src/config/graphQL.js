@@ -17,13 +17,15 @@ const userTypeDefs = require('../graphql/user/typeDefs');
 const userResolvers = require('../graphql/user/resolvers');
 const authTypeDefs = require('../graphql/auth/typeDefs');
 const authResolvers = require('../graphql/auth/resolvers');
+const shoppingCartTypeDefs = require('../graphql/shoppingCart/typeDefs');
+const shoppingCartResolvers = require('../graphql/shoppingCart/resolvers');
 
 const schema = makeExecutableSchema(
     {
         typeDefs: [
-            rootTypeDefs, productTypeDefs, userTypeDefs, authTypeDefs
+            rootTypeDefs, productTypeDefs, userTypeDefs, authTypeDefs, shoppingCartTypeDefs
         ],
-        resolvers: merge(productResolvers, userResolvers, authResolvers)
+        resolvers: merge(productResolvers, userResolvers, authResolvers, shoppingCartResolvers)
     }
 );
 
