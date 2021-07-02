@@ -1,12 +1,12 @@
 'use strict';
 
-const { create, findAll, findByProductId, incrementQuantity } = require('../../repositories/ShoppingCartRepository');
+const { create, findAll, findByProductId, incrementQuantity, removeById } = require('../../repositories/ShoppingCartRepository');
 const { authenticated, validateRole } = require('../../services/auth');
 
 const ShoppingCartResolver = {
     Query: {
-        shoppingCarts: authenticated(validateRole(['customer'])(async (root, { filters = {} }, context) => {
-            return await findAll({});
+        myShoppingCart: authenticated(validateRole(['customer'])(async (root, { filters = {} }, context) => {
+            return await findAll({customerId: context.currentUser._id});
         }))
     },
     Mutation: {
@@ -29,6 +29,10 @@ const ShoppingCartResolver = {
                 const shoppingCart = await create(input);
                 return shoppingCart.toObject();
             }
+        })),
+        removeById: authenticated(validateRole(['customer'])(async (root, { id }, context) => {
+            const isRemoved = await removeById(id, context.currentUser._id);
+            return isRemoved.deletedCount > 0;
         }))
     }
 };

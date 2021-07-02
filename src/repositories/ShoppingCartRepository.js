@@ -27,9 +27,16 @@ const incrementQuantity = async (id, quantity) => {
         .catch(err => console.log(err))
 }
 
+const removeById = async (id, customerId) => {
+    return await ShoppingCart
+        .deleteOne({_id: id, customerId: customerId})
+        .catch(err => console.log(err))
+}
+
 module.exports = {
     create,
     findAll,
     findByProductId,
-    incrementQuantity
+    incrementQuantity,
+    removeById
 }

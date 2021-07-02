@@ -16,11 +16,12 @@ const typeDefs = gql`
     }
     
     extend type Query {
-        shoppingCarts: [ShoppingCart]
+        myShoppingCart: [ShoppingCart]
     }
     
     extend type Mutation {
         addShoppingCart(input: ShoppingCartInput): ShoppingCart
+        removeById(id: ID!): Boolean
     }
 `;
 
